@@ -1,0 +1,43 @@
+    <%- include ('../views/partials/header&style.ejs') -%>
+
+    <% if(user){ %>
+    <div class="container mt-5">
+        <h2 align="center" class="mb-5" style="color:#52544a;">Explore</h2>
+        <div style="border-radius: 10px;" class="col-sm-12 bg-secondary mt-5 p-5">
+            <% if(message && message != "") { %>
+                <div class="alert alert-success">
+                    <%= message %>
+                </div>
+                <% } %>
+            <div class="row">
+                <% product.forEach(prod =>{  %>
+                <div align="center" class="col-sm-6 col-lg-4 p-0 mb-5" style="height: auto;">
+                    <div class="card p-1 bg-primary" style="width: 18rem; height: 100%; border:#282923 solid 3px; border-radius: 10px;" >
+                        <% if(prod.image == "" || prod.image == undefined){ %>
+                        <img src="\images\alt_image.png" alt="" style="border-radius: 10px;">
+                        <% }else{ %>
+                            <img src="/images/<%=prod.image%>" alt="" style="border-radius: 10px;" height="250" width="277px">
+                            <% } %> 
+                        <div class="card-body mt-1">
+                            <h5 class="card-title"><%= prod.title%></h5>
+                            <p style="border: solid #F1F2EC 1px; border-radius: 10px; height: 200px; overflow: auto;" class="card-text p-2"><%= prod.description%></p>
+                            <a style="bottom: 0; background-color: #282923; color: #F1F2EC;" href="/details/<%=prod._id%>" class="btn">More details</a>
+                        </div>
+                    </div>
+                </div>
+                <%})%>
+            </div>
+        </div>
+    </div>
+    <% }else{ %>
+    <div class="container mt-5">
+        <h1>Welcome to our <b>CS346</b> course website project!</h1><br>
+        <h2>First, You need to login or create new account to access all the features.</h2><br>
+        <form action="/signup" method="GET">
+            <button style="color: #F1F2EC;" align="center" type="submit" class="btn btn-lg bg-primary">Get started</button>
+        </form>
+    </div>
+    <% } %>
+
+    <%- include ('../views/partials/footer.ejs') -%>
+
